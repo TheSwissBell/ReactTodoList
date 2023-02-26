@@ -14,19 +14,15 @@ export default function Todolist() {
     const [todos, setTodos] = React.useState([]);
 
     const handleAddTodo = (event) => {
-        event.preventDefault();
+        event.preventDefault(); // Because I'm using HRML form
         setTodos([todo, ...todos]);
         setTodo({description: '', date: ''});
-    };
-
-    const handleDeleteTodo = (row) => {
-        
-        setTodos(todos.filter((todo, index) => index !== row)) // Return a new array filtered with our condition
     };
 
     return (
         <div>
             <h1>Simple TodoList</h1>
+            <h3>Add a new todo</h3>
             <form title="Add todo">
                 <label>Description</label>
                 <input
@@ -44,13 +40,18 @@ export default function Todolist() {
                 <button onClick={handleAddTodo}>Add</button>
             </form>
             <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
                 <tbody>
                     {
                         todos.map((todo, index) =>
                             <tr key={index}>
                                 <td>{todo.description}</td>
                                 <td>{todo.date}</td>
-                                <td><button onClick={() => handleDeleteTodo(index)}>Delete</button></td> 
                             </tr>)
                     }
                 </tbody>
@@ -58,6 +59,7 @@ export default function Todolist() {
         </div>
     )
 }
+
 
 // OR
 //export default Todolist;
